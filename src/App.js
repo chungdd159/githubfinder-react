@@ -1,25 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Users from './components/users/Users';
+import NavBar from './components/layout/NavBar';
+import { Provider } from './context';
+import Search from './components/layout/Search';
+import Alert from './components/layout/Alert';
+import about from './components/pages/about';
+import UserDetail from './components/users/UserDetail';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider>
+      <Router>
+        <React.Fragment>
+          <NavBar />
+          <div className="container">
+            <Alert />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <React.Fragment>
+                    <Search />
+                    <Users />
+                  </React.Fragment>
+                )}
+              />
+              <Route exact path="/about" component={about} />
+              <Route exact path="/user/:login" component={UserDetail} />
+            </Switch>
+          </div>
+        </React.Fragment>
+      </Router>
+    </Provider>
   );
 }
 
