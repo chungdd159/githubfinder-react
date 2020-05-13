@@ -8,13 +8,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         users: action.payload,
-        loading: false,
       };
     case 'CLEAR':
       return {
         ...state,
         users: action.payload,
-        loading: false,
       };
     case 'ALERT':
       return {
@@ -37,7 +35,6 @@ const reducer = (state, action) => {
 export class Provider extends Component {
   state = {
     users: [],
-    loading: false,
     mes: '',
     clname: '',
     dispatch: (action) => this.setState((state) => reducer(state, action)),
