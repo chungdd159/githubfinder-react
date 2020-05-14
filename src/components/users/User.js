@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-const User = ({ user: { login, avatar_url, html_url } }) => {
+const User = ({ user }) => {
+  const { avatar_url, login } = user
   return (
     <div className="col-lg-4">
-      <div className="card text-center mb-4 py-4" style={{alignItems: 'center'}}>
+      <div
+        className="card text-center mb-4 py-4"
+        style={{ alignItems: 'center' }}
+      >
         <img
           src={avatar_url}
           alt=""

@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Users from './components/users/Users';
 import NavBar from './components/layout/NavBar';
-import { Provider } from './context';
+import GithubState from './components/context/GithubState';
 import Search from './components/layout/Search';
 import Alert from './components/layout/Alert';
 import about from './components/pages/about';
@@ -11,7 +11,7 @@ import UserDetail from './components/users/UserDetail';
 
 function App() {
   return (
-    <Provider>
+    <GithubState>
       <Router>
         <React.Fragment>
           <NavBar />
@@ -34,7 +34,7 @@ function App() {
           </div>
         </React.Fragment>
       </Router>
-    </Provider>
+    </GithubState>
   );
 }
 
