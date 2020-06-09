@@ -3,7 +3,7 @@ import GithubContext from '../context/GithubContext';
 
 const Search = () => {
   const [text, setText] = useState('');
-  const { users, searchUser, loading, clearUser } = useContext(GithubContext);
+  const { users, searchUser, clearUser } = useContext(GithubContext);
 
   const onChange = (e) => setText(e.target.value);
 
@@ -16,27 +16,27 @@ const Search = () => {
   const onClick = () => clearUser();
 
   return (
-    <div className="mb-5 mt-2">
+    <div className='mb-5 mt-2'>
       <form onSubmit={onSubmit}>
-        <div className="form-group">
+        <div className='form-group'>
           <input
-            type="text"
-            className="form-control form-control-lg"
-            placeholder="Search User..."
-            name="text"
+            type='text'
+            className='form-control form-control-lg'
+            placeholder='Search User...'
+            name='text'
             value={text}
             onChange={onChange}
           />
           <button
-            className="btn btn-primary btn-lg btn-block mt-3"
-            type="submit"
+            className='btn btn-primary btn-lg btn-block mt-3'
+            type='submit'
           >
             Get Users
           </button>
         </div>
       </form>
       {users.length > 0 && (
-        <button className="btn btn-light btn-block" onClick={onClick}>
+        <button className='btn btn-light btn-block' onClick={onClick}>
           Clear Out
         </button>
       )}

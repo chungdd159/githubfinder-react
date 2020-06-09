@@ -11,6 +11,13 @@ export default (state, action) => {
         users: action.payload,
         loading: false,
       };
+    case 'SEARCH_REPOS':
+      return {
+        ...state,
+        user: action.payload.user,
+        repos: action.payload.repos,
+        loading: false,
+      };
     case 'CLEAR_USER':
       return {
         ...state,

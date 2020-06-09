@@ -22,13 +22,44 @@ const GithubState = (props) => {
       const res = await axios.get(
         `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
       );
-      console.log(res.data);
+
+      {
+        res.data.items.length === 0 &&
+          dispatch({
+            type: 'SHOW_ALERT',
+            payload: { msg: 'No User Found', type: 'danger' },
+          });
+        setTimeout(() => {
+          dispatch({
+            type: 'REMOVE_ALERT',
+          });
+        }, 2000);
+      }
       dispatch({
         type: 'SEARCH_USER',
         payload: res.data.items,
       });
     }
   };
+  //  search-user-detail
+
+  const userDetail = async (login) => {
+    setLoading(true);
+    const res = await axios.get(
+      `https://api.github.com/users/${login}?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
+    );
+    const repos = await axios.get(
+      `https://api.github.com/users/${login}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
+    );
+    dispatch({
+      type: 'SEARCH_REPOS',
+      payload: {
+        user: res.data,
+        repos: repos.data,
+      },
+    });
+  };
+
   // clear user
   const clearUser = () => {
     dispatch({
@@ -64,6 +95,7 @@ const GithubState = (props) => {
         searchUser,
         clearUser,
         showAlert,
+        userDetail,
       }}
     >
       {props.children}
